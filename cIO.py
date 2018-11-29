@@ -2,7 +2,7 @@
 # Filename: cIO.py
 try:
     import os, sys, logging
-    sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')) + "\\openpyxl\\")
+    sys.path.append(os.path.abspath(os.path.dirname(__file__)) + "\\openpyxl\\")
     import openpyxl as oxl
 except:
     print("ExceptionERROR: Missing fundamental packages (required: os, sys, logging, openpyxl).")

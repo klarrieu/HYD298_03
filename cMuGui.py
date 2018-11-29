@@ -27,7 +27,7 @@ class MyGui(tk.Frame):
         self.mu.insert(0, "CLEAR ALL")  # required key
 
         # Construct the Frame object
-        ### see lecture slides (inheritance)
+        tk.Frame.__init__(self, master)
 
         # Pack master Window
         self.pack(expand=True, fill=tk.BOTH)
@@ -36,7 +36,7 @@ class MyGui(tk.Frame):
         self.use_check_button = tk.IntVar()
 
         # ARRANGE GEOMETRY
-        ### create self.dx and self.dy, which define distance holders in x and y-directions (use 8 pixels)
+        self.xd, self.yd = (8, 8)
 
         # width and height of the window
         ww = 450  # controls window width
@@ -63,16 +63,16 @@ class MyGui(tk.Frame):
         self.cb_mu.select()
 
         # BUTTONS
-        self.b_select = tk.Button(self, text="Add selected", command=lambda: ### complete: call self.set_mu() with argument mu="get_selection"
+        self.b_select = tk.Button(self, text="Add selected", command=lambda: self.set_mu(mu="get_selection"))
         self.b_select.grid(sticky=tk.EW, row=1, column=self.max_columnspan - 1, padx=self.xd)
 
-        self.b_show_mu = tk.Button(self, width=12, bg="white", text="Show selected\nMUs", command=lambda: ### complete: call self.shout_list() with the argument the_list=self.mu_active
+        self.b_show_mu = tk.Button(self, width=12, bg="white", text="Show selected\nMUs", command=lambda: self.shout_list(the_list=self.mu_active))
         self.b_show_mu.grid(sticky=tk.EW, row=2, column=self.max_columnspan - 1, padx=self.xd)
 
-        self.b_change_dir = tk.Button(self, width=12, bg="white", text="Change Raster input directory", command=lambda: ### complete: call self.set_path_raster(), without any argument
+        self.b_change_dir = tk.Button(self, width=12, bg="white", text="Change Raster input directory", command=lambda: self.set_path_raster())
         self.b_change_dir.grid(sticky=tk.EW, row=4, column=0, columnspan=self.max_columnspan, padx=self.xd, pady=self.yd)
 
-        self.b_run = tk.Button(self, bg="forest green", text="RUN", command=lambda: ### complete: call mm.main() function with input arguments (1) self.path_raster and (2) self.mu_active
+        self.b_run = tk.Button(self, bg="forest green", text="RUN", command=lambda: mm.main(self.path_raster, self.mu_active))
         self.b_run.grid(sticky=tk.EW, row=6, rowspan=2, column=0, columnspan=self.max_columnspan, padx=self.xd, pady=self.yd)
 
         # LABELS
@@ -116,14 +116,14 @@ class MyGui(tk.Frame):
                 # deactivate selection menu if checkbutton is selected
                 self.l_select["state"] = "disabled"
                 self.b_select["state"] = "disabled"
-                ### set the state of self.lb_mu to "disabled" -- see the difference
+                self.lb_mu["state"] = "disabled"
                 self.mu_active = self.mu[1:]
             else:
                 # activate selection menu if checkbutton is deselected
                 self.mu_active = []
                 self.l_select["state"] = "normal"
                 self.b_select["state"] = "normal"
-                ### set the state of self.lb_mu to "normal" -- see the difference
+                self.lb_mu["state"] = "normal"
 
         if mu == "get_selection":
             selected_item = [self.mu[int(item)] for item in self.lb_mu.curselection()][0]
@@ -143,5 +143,5 @@ class MyGui(tk.Frame):
 
 
 ### enable script to run stand-alone
-# if __name__ == "__main__":
-#     MyGui().mainloop()
+if __name__ == "__main__":
+    MyGui().mainloop()
