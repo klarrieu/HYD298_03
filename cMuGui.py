@@ -53,7 +53,7 @@ class MyGui(tk.Frame):
         self.closemenu = tk.Menu(self.mbar, tearoff=0)  # create new menu
         self.mbar.add_cascade(label="Close", menu=self.closemenu)  # attach it to the menubar
         self.closemenu.add_command(label="Credits", command=lambda: self.show_credits())
-        self.closemenu.add_command(label="Quit programm", command=lambda: self.myquit())
+        self.closemenu.add_command(label="Quit program", command=lambda: self.myquit())
         # for changing menu entries use :
         # self.closemenu.entryconfig(int(entrynumber), label="New", foreground="other", command=lambda: self.new_f())
 
