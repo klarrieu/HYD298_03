@@ -9,3 +9,4 @@
 
 
 ## Mindmap of Code
+![](mindmap.png)
